@@ -1,8 +1,6 @@
 provider "aws" {
     region      = "eu-north-1"
-     access_key = ""
-     secret_key = ""
-    
+  
 }
 
 resource "aws_instance" "test_jenkins_terraform" {
