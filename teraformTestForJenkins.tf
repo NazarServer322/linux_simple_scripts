@@ -28,7 +28,7 @@ resource "aws_instance" "Jenkins_for_Terraform" {
   ami                    = "ami-0ed17ff3d78e74700"
   instance_type          = "t3.micro"
   vpc_security_group_ids = [aws_security_group.web_server.id]
-  key_name               = "devops_course_work"
+
   
   tags = {
     Name    = "Created using terraform"
