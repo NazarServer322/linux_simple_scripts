@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+    tools {
+  terraform 'Terraform' 
+}
+    stages {
+        stage('git') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/NazarServer322/linux_simple_scripts.git']]])
+            }
+            }
+    
+        stage('Terraform init') {
+            steps {
+                sh 'terraform init'
+            }    
+        }
+ 
+        stage('terraform apply') {
+            steps{
+                sh "terraform apply --auto-approve"
+            }
+        }
+        stage('terraform destroy') {
+            steps{
+                sh "terraform destroy --auto-approve"
+            }
+        }
+}
+}
+/// first of all need install in jenkins tools "terraform" and show the directory where is the terraform  "which terraform  and it is the directory  /usr/bin/terraform
+/// second  give the permission  IMA on EC2 instans which run jenkins(the resson why need the permission it's becouse  we don't use accses and secret key in this example)
