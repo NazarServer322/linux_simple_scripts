@@ -1,3 +1,9 @@
+provider "aws" {
+    region      = "eu-north-1"
+     access_key = "AKIAVYLC26J2GBLUCCFB"
+     secret_key = "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"
+    
+}
 resource "aws_security_group" "web_server" {
   
   name_prefix = "web"
