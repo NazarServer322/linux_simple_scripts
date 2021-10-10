@@ -3,6 +3,10 @@ pipeline {
     tools {
   terraform 'Terraform' 
 }
+    parameters {
+        choice(name: 'CHOICE', choices: ['apply', 'destroy'], description: ' apply or  destroy')
+
+    }
     stages {
         stage('git') {
             steps {
@@ -18,15 +22,12 @@ pipeline {
  
         stage('terraform apply') {
             steps{
-                sh "terraform apply --auto-approve"
+                sh " terraform ${params.CHOICE} --auto-approve"
             }
         }
-        stage('terraform destroy') {
-            steps{
-                sh "terraform destroy --auto-approve"
-            }
+        
         }
-}
+
 }
 /// first of all need install in jenkins tools "terraform" and show the directory where is the terraform   command:"which terraform  and it is the directory  /usr/bin/terraform
 /// second  give the permission  IMA on EC2 instans which run jenkins(the resson why need the permission it's becouse  we don't use accses and secret key in this example)
