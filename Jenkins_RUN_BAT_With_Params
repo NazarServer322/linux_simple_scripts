@@ -1,0 +1,16 @@
+pipeline {
+        parameters {
+  string defaultValue: '', name: 'Version'
+}
+    agent {
+         label 'Python'    
+
+}
+    stages {
+        stage('Hello') {
+            steps {
+                bat 'py.exe simpleScript.py %Version%'
+            }
+        }
+    }
+}
