@@ -1,0 +1,25 @@
+pipeline {
+       parameters {
+  choice choices: ['RedPanda_Android.py', 'RedPanda_IOS.py', 'Panther.Enable.IOS.py', 'Panther.Enable.Android.py', 'Equis_Android.py', 'Equis_IOS.py', 'Panther_IOS.py', 'Panther_Android.py', 'PantherAwsServer_iOS.py', 'PantherAwsServer_Android.py', 'RadiantCreate_Android.py', 'RadiantCreate_iOS.py', 'RedPanda_IOS_AdHoc.py' ], name: 'Choice-Diawi'
+  choice choices: ['Build','Skip'], name: 'BuildOrSkip'
+  
+  string defaultValue: '', name: 'Version'
+}
+
+    agent {
+         label 'TVA_102'    
+
+}
+
+    
+    stages {
+        stage('CI/CD!') {
+         when {
+                    expression { BuildOrSkip == 'Build' } 
+         }
+            steps {
+                bat ' py.exe %Choice-Diawi% %Version%'
+            }
+        }
+    }
+}
